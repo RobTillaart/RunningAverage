@@ -1,9 +1,10 @@
 //
 //    FILE: RunningAverage.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.16
+// VERSION: 0.3.1
 //    DATE: 2015-July-10
-// PURPOSE: RunningAverage library for Arduino
+// PURPOSE: Arduino library to calculate the running average by means of a circular buffer
+//     URL: https://github.com/RobTillaart/RunningAverage
 //
 // The library stores N individual values in a circular buffer,
 // to calculate the running average.
@@ -31,9 +32,8 @@
 // 0.2.14 - 2020-01-15 added getValue(n) to retrieve elements in order of addition - see issue #132
 // 0.2.15 - 2020-01-17 fix overflow in getValue - see issue #139
 // 0.2.16   2020-04-16 improve _sum - see issue #149 (bourkemcrobbo)
-//
-// Released to the public domain
-//
+// 0.3.0    2020-04-16 main refactor
+// 0.3.1    2020-06-19 fix library.json; minor refactor
 
 #include "RunningAverage.h"
 
