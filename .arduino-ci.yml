@@ -5,3 +5,7 @@ compile:
     - leonardo
     - due
     - zero
+    - mega
+    - m4
+    - esp32
+    - esp8266
