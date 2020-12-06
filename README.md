@@ -2,6 +2,13 @@
 
 Arduino library to calculate the running average by means of a circular buffer.
 
+[![Arduino CI](https://github.com/RobTillaart/RunningAverage/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/SHT31/blob/master/LICENSE)
+
+[![GitHub release](https://img.shields.io/github/release/RobTillaart/SHT31.svg?maxAge=3600)](https://github.com/RobTillaart/SHT31/releases)
+
+
 ## Description
 The RunningAverage object gives a running average of the last N numbers, giving them
 all equal weight. This is doen by adding new data to an internal circular buffer, 
