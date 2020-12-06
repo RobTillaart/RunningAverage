@@ -33,7 +33,6 @@ unittest_teardown()
 {
 }
 
-
 unittest(test_zero_elements)
 {
   RunningAverage myRA(10);
@@ -49,7 +48,6 @@ unittest(test_zero_elements)
   assertEqual(0, x);
 }
 
-
 unittest(test_min_max)
 {
   RunningAverage myRA(10);
@@ -61,9 +59,30 @@ unittest(test_min_max)
   }
 
   float mi = myRA.getMin();
-  assertEqual(-4, mi);
+  assertEqual(-5, mi);
   float ma = myRA.getMax();
   assertEqual(5, ma);
+  
+  mi = myRA.getMinInBuffer();
+  assertEqual(-4, mi);
+  ma = myRA.getMaxInBuffer();
+  assertEqual(5, ma);
+}
+
+unittest(test_buffer_full)
+{
+  RunningAverage myRA(10);
+  myRA.clear();
+  assertFalse(myRA.bufferIsFull());
+  
+  for (int i = 0; i < 9; i++)
+  {
+    myRA.addValue(i);
+    assertFalse(myRA.bufferIsFull());
+  }
+
+  myRA.addValue(42);
+  assertTrue(myRA.bufferIsFull());
 }
 
 
