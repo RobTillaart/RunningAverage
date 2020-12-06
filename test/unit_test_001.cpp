@@ -61,7 +61,7 @@ unittest(test_min_max)
   }
 
   float mi = myRA.getMin();
-  assertEqual(-4, ma);
+  assertEqual(-4, mi);
   float ma = myRA.getMax();
   assertEqual(5, ma);
 }
