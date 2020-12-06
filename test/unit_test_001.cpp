@@ -62,7 +62,7 @@ unittest(test_min_max)
   assertEqual(-5, mi);
   float ma = myRA.getMax();
   assertEqual(5, ma);
-  
+
   mi = myRA.getMinInBuffer();
   assertEqual(-4, mi);
   ma = myRA.getMaxInBuffer();
@@ -74,7 +74,7 @@ unittest(test_buffer_full)
   RunningAverage myRA(10);
   myRA.clear();
   assertFalse(myRA.bufferIsFull());
-  
+
   for (int i = 0; i < 9; i++)
   {
     myRA.addValue(i);
