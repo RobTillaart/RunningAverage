@@ -33,13 +33,6 @@ unittest_teardown()
 {
 }
 
-unittest(test_zero_elements)
-{
-  RunningAverage myRA(10);
-  myRA.clear();
-  float x = myRA.getAverage();
-  assertEqual(0, x);
-}
 
 unittest(test_zero_elements)
 {
