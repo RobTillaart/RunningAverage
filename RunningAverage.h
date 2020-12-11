@@ -17,7 +17,6 @@
 class RunningAverage
 {
 public:
-  RunningAverage(void);
   explicit RunningAverage(const uint8_t size);
   ~RunningAverage();
 
