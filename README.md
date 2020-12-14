@@ -23,31 +23,33 @@ update the internal **\_sum**.
 ## Interface
 
 ### Constructor
-- **RunningAverage(const uint8_t size)** allocates dynamic memory, one float (4bytes) er element. No default size (yet).
-- **~RunningAverage()** deconstructor to remove memory allocated
+
+- **RunningAverage(const uint8_t size)** allocates dynamic memory, one float (4 bytes) per element. 
+No default size (yet).
+- **~RunningAverage()** deconstructor to free the memory allocated.
 
 ### Basic 
-- **clear()** empties internal admin
+- **clear()** empties internal buffer.
 - **addValue(value)** adds a new value to the object, if internal buffer is full, the oldest element is removed.
 - **fillValue(value, nr)**  adds nr elements of value. Good for initializing system.
-- **getValue(pos)** returns element at position pos.
-- **getAverage()** iterates over all elements to get the average
-- **getFastAverage()** reuses previous calculated values, therefor faster
+- **getValue(pos)** returns element at position **pos**.
+- **getAverage()** iterates over all elements to get the average, slower but accurate
+- **getFastAverage()** reuses previous calculated values, therefor faster. Accuracy can drift.
 
 ### Extended functions
-- **getStandardDeviation()** returns the stddev of the current content. Needs more than one element. 
-- **getStandardError()** returns the staderror of the current content.
+- **getStandardDeviation()** returns the stddev of the current content. Needs more than one element.
+- **getStandardError()** returns the stderror of the current content.
 - **getMin()** returns minimum since last clear, does not need to be in the buffer.
 - **getMax()** returns maximum since last clear, does not need to be in the buffer.
 - **getMinInBuffer()** returns minimum in the internal buffer.
 - **getMaxInBuffer()** returns maxumum in the internal buffer.
 
 ### Admin functions
-- **bufferIsFull()** returns true if buffer is full
-- **getElement(uint8_t idx)** get element directly from internal buffer. (debug)
-- **getSize()** idem
-- **getCount()** idem
 
+- **bufferIsFull()** returns true if buffer is full.
+- **getElement(uint8_t idx)** get element directly from internal buffer. (debug)
+- **getSize()** idem.
+- **getCount()** idem.
 
 ## Operation
 
