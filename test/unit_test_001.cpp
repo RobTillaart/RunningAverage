@@ -35,6 +35,8 @@ unittest_teardown()
 
 unittest(test_zero_elements)
 {
+  fprintf(stderr, "VERSION: %s\n", RUNNINGAVERAGE_LIB_VERSION);
+
   RunningAverage myRA(10);
   myRA.clear();
 
