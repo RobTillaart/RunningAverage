@@ -51,9 +51,10 @@ public:
   uint16_t getSize() const { return _size; }
   uint16_t getCount() const { return _count; }
 
-  // use not all elements just a partial part
+  // use not all elements just a part from 0..partial-1
   void     setPartial(const uint16_t part = 0);  // 0 ==> use all
-  uint16_t getPartial() { return _partial; };
+  void     resetPartial() { _partial = _size; };
+  uint16_t getPartial()   { return _partial; };
 
 protected:
   uint16_t _size;
