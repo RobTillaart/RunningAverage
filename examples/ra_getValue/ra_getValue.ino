@@ -55,8 +55,8 @@ void loop(void)
   Serial.println();
 
   Serial.print("\t get last 5 elements added: ");
-  uint16_t last = myRA.getCount() - 1;     // -1 as first idx == 0
-  for (uint16_t i = last; i > last - 5 && i >= 0; i--)
+  int last = myRA.getCount() - 1;     // -1 as first idx == 0
+  for (int i = last; i > last - 5 && i >= 0; i--)
   {
     Serial.print("\t");
     Serial.print(myRA.getValue(i), 0);
