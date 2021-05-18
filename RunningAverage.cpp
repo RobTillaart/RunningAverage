@@ -210,4 +210,13 @@ float RunningAverage::getValue(const uint16_t index)
   return _array[pos];
 }
 
+
+void RunningAverage::setPartial(const uint16_t part)
+{
+  _partial = part;
+  if (_partial == 0) partial = _size;
+  // 
+  clear();
+}
+
 // -- END OF FILE --

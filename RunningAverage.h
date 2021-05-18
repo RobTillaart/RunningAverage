@@ -51,11 +51,15 @@ public:
   uint16_t getSize() const { return _size; }
   uint16_t getCount() const { return _count; }
 
+  // use not all elements just a partial part
+  void     setPartial(const uint16_t part = 0);  // 0 ==> use all
+  uint16_t getPartial() { return _partial; };
 
 protected:
   uint16_t _size;
   uint16_t _count;
   uint16_t _index;
+  uint16_t _partial;
   float    _sum;
   float*   _array;
   float    _min;
