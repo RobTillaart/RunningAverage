@@ -26,7 +26,7 @@ public:
   void     add(const float value)    { addValue(value); };
   void     addValue(const float);
   void     fillValue(const float, const uint8_t);
-  float    getValue(const uint8_t);
+  float    getValue(const uint16_t);
 
   float    getAverage();      // iterates over all elements.
   float    getFastAverage() const;  // reuses previous calculated values.
@@ -46,7 +46,7 @@ public:
   // return true if buffer is full
   bool     bufferIsFull() const { return _count == _size; };
 
-  float    getElement(uint8_t idx) const;
+  float    getElement(uint16_t idx) const;
 
   uint16_t getSize() const { return _size; }
   uint16_t getCount() const { return _count; }
