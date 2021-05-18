@@ -26,13 +26,13 @@ void loop(void)
   Serial.println();
 
   myRA.clear();
-  for (int i = 0; i < 7; i++)
+  for (uint16_t i = 0; i < 7; i++)
   {
     myRA.addValue(i);
   }
 
   Serial.print("\t getValue 0..getCount(): ");
-  for (int i = 0; i < myRA.getCount(); i++)
+  for (uint16_t i = 0; i < myRA.getCount(); i++)
   {
     Serial.print("\t");
     Serial.print(myRA.getValue(i), 0);
@@ -41,13 +41,13 @@ void loop(void)
 
   // note first values (0..2) will be overwritten by 10..12
   myRA.clear();
-  for (int i = 0; i < 13; i++)
+  for (uint16_t i = 0; i < 13; i++)
   {
     myRA.addValue(i);
   }
 
   Serial.print("\t getValue 0..getCount(): ");
-  for (int i = 0; i < myRA.getCount(); i++)
+  for (uint16_t i = 0; i < myRA.getCount(); i++)
   {
     Serial.print("\t");
     Serial.print(myRA.getValue(i), 0);
@@ -55,8 +55,8 @@ void loop(void)
   Serial.println();
 
   Serial.print("\t get last 5 elements added: ");
-  int last = myRA.getCount() - 1;     // -1 as first idx == 0
-  for (int i = last; i > last - 5 && i >= 0; i--)
+  uint16_t last = myRA.getCount() - 1;     // -1 as first idx == 0
+  for (uint16_t i = last; i > last - 5 && i >= 0; i--)
   {
     Serial.print("\t");
     Serial.print(myRA.getValue(i), 0);

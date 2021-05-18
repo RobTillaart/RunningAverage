@@ -25,7 +25,7 @@ public:
   void     clear();
   void     add(const float value)    { addValue(value); };
   void     addValue(const float);
-  void     fillValue(const float, const uint8_t);
+  void     fillValue(const float, const uint16_t);
   float    getValue(const uint16_t);
 
   float    getAverage();      // iterates over all elements.
