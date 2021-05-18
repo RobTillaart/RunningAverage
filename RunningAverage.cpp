@@ -43,6 +43,7 @@
 RunningAverage::RunningAverage(const uint16_t size)
 {
   _size = size;
+  _partial = _size;
   _array = (float*) malloc(_size * sizeof(float));
   if (_array == NULL) _size = 0;
   clear();
@@ -80,7 +81,7 @@ void RunningAverage::addValue(const float value)
   _sum += _array[_index];
   _index++;
 
-  if (_index == _size) _index = 0;  // faster than %
+  if (_index == _partial) _index = 0;  // faster than %
 
   // handle min max
   if (_count == 0) _min = _max = value;
@@ -88,7 +89,7 @@ void RunningAverage::addValue(const float value)
   else if (value > _max) _max = value;
 
   // update count as last otherwise if ( _count == 0) above will fail
-  if (_count < _size) _count++;
+  if (_count < _partial) _count++;
 }
 
 
