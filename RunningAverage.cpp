@@ -1,7 +1,7 @@
 //
 //    FILE: RunningAverage.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.3.2
+// VERSION: 0.4.0
 //    DATE: 2015-July-10
 // PURPOSE: Arduino library to calculate the running average by means of a circular buffer
 //     URL: https://github.com/RobTillaart/RunningAverage
@@ -35,12 +35,12 @@
 //  0.3.0   2020-04-16  main refactor
 //  0.3.1   2020-06-19  fix library.json; minor refactor
 //  0.3.2   2021-01-15  add add() + license + refactor
-
+//  0.4.0   2021-05-18  increase size above 256 elements (16 bit version)
 
 #include "RunningAverage.h"
 
 
-RunningAverage::RunningAverage(const uint8_t size)
+RunningAverage::RunningAverage(const uint16_t size)
 {
   _size = size;
   _array = (float*) malloc(_size * sizeof(float));
@@ -63,7 +63,7 @@ void RunningAverage::clear()
   _sum = 0.0;
   _min = NAN;
   _max = NAN;
-  for (uint8_t i = _size; i > 0; )
+  for (uint16_t i = _size; i > 0; )
   {
     _array[--i] = 0.0; // keeps addValue simpler
   }
@@ -98,7 +98,7 @@ float RunningAverage::getAverage()
   if (_count == 0) return NAN;
 
   _sum = 0;
-  for (uint8_t i = 0; i < _count; i++)
+  for (uint16_t i = 0; i < _count; i++)
   {
     _sum += _array[i];
   }
@@ -121,7 +121,7 @@ float RunningAverage::getMinInBuffer() const
   if (_count == 0) return NAN;
 
   float min = _array[0];
-  for (uint8_t i = 1; i < _count; i++)
+  for (uint16_t i = 1; i < _count; i++)
   {
     if (_array[i] < min) min = _array[i];
   }
@@ -135,7 +135,7 @@ float RunningAverage::getMaxInBuffer() const
   if (_count == 0) return NAN;
 
   float max = _array[0];
-  for (uint8_t i = 1; i < _count; i++)
+  for (uint16_t i = 1; i < _count; i++)
   {
     if (_array[i] > max) max = _array[i];
   }
@@ -144,7 +144,7 @@ float RunningAverage::getMaxInBuffer() const
 
 
 // returns the value of an element if exist, NAN otherwise
-float RunningAverage::getElement(uint8_t index) const
+float RunningAverage::getElement(uint16_t index) const
 {
   if (index >=_count ) return NAN;
 
@@ -159,7 +159,7 @@ float RunningAverage::getStandardDeviation() const
 
   float temp = 0;
   float average = getFastAverage();
-  for (uint8_t i = 0; i < _count; i++)
+  for (uint16_t i = 0; i < _count; i++)
   {
     temp += pow((_array[i] - average), 2);
   }
@@ -188,19 +188,19 @@ float RunningAverage::getStandardError() const //++
 
 // fill the average with the same value number times. (weight)
 // This is maximized to size times. no need to fill the internal buffer over 100%
-void RunningAverage::fillValue(const float value, const uint8_t number)
+void RunningAverage::fillValue(const float value, const uint16_t number)
 {
   clear();
-  uint8_t s = number;
+  uint16_t s = number;
   if (s > _size) s = _size;
-  for (uint8_t i = s; i > 0; i--)
+  for (uint16_t i = s; i > 0; i--)
   {
     addValue(value);
   }
 }
 
 
-float RunningAverage::getValue(const uint8_t index)
+float RunningAverage::getValue(const uint16_t index)
 {
   if (_count == 0) return NAN;
   if (index >= _count) return NAN;  // cannot ask more than is added
