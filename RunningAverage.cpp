@@ -215,8 +215,7 @@ float RunningAverage::getValue(const uint16_t index)
 void RunningAverage::setPartial(const uint16_t part)
 {
   _partial = part;
-  if (_partial == 0) _partial = _size;
-  // 
+  if ((_partial == 0) || (_partial > _size)) _partial = _size;
   clear();
 }
 

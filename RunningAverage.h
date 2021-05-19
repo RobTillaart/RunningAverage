@@ -52,8 +52,8 @@ public:
   uint16_t getCount() const { return _count; }
 
   // use not all elements just a part from 0..partial-1
+  // (re)setting partial will clear the internal buffer.
   void     setPartial(const uint16_t part = 0);  // 0 ==> use all
-  void     resetPartial() { _partial = _size; };
   uint16_t getPartial()   { return _partial; };
 
 protected:
