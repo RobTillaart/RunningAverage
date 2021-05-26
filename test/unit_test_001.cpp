@@ -130,14 +130,14 @@ unittest(test_partial)
   {
     myRA.addValue(i);
   }
-  assertEqualFloat(94.5, myRA.getValue(), 0.001);
+  assertEqualFloat(94.5, myRA.getAverage(), 0.001);
 
   myRA.setPartial(20);
   for (int i = 0; i < 100; i++)
   {
     myRA.addValue(i);
   }
-  assertEqualFloat(89.5, myRA.getValue(), 0.001);
+  assertEqualFloat(89.5, myRA.getAverage(), 0.001);
 }
 
 
