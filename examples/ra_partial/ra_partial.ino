@@ -2,15 +2,17 @@
 //    FILE: ra_partial.ino
 //  AUTHOR: Rob Tillaart
 // VERSION: 0.1.0
-//    DATE: 2020-01-15
+//    DATE: 2021-05-26
 //
-// PUPROSE: demonstrate access in order of the values added
+// PUPROSE: demonstrate partial use of internal buffer
 //
+
 
 #include "RunningAverage.h"
 
 RunningAverage myRA(25);
 int samples = 0;
+
 
 void setup(void)
 {
@@ -89,5 +91,6 @@ void setup(void)
 void loop(void)
 {
 }
+
 
 // -- END OF FILE --

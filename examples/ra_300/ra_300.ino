@@ -1,16 +1,17 @@
 //
-//    FILE: ra_getValue.ino
+//    FILE: ra_300.ino
 //  AUTHOR: Rob Tillaart
 // VERSION: 0.1.0
-//    DATE: 2020-01-15
+//    DATE: 2021-05-26
 //
-// PUPROSE: demonstrate access in order of the values added
+// PUPROSE: demonstrate large (16 bit) buffer
 //
 
 #include "RunningAverage.h"
 
 RunningAverage myRA(300);
 int samples = 0;
+
 
 void setup(void)
 {
@@ -31,6 +32,7 @@ void setup(void)
     Serial.println();
   }
 }
+
 
 void loop(void)
 {
