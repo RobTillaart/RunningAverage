@@ -7,6 +7,7 @@
 // PUPROSE: demonstrate large (16 bit) buffer
 //
 
+
 #include "RunningAverage.h"
 
 RunningAverage myRA(300);
@@ -38,4 +39,6 @@ void loop(void)
 {
 }
 
+
 // -- END OF FILE --
+

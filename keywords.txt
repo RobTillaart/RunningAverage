@@ -1,7 +1,7 @@
-# Syntax Coloring Map For RunningAverage
+# Syntax Colouring Map For RunningAverage
 
 
-# Datatypes (KEYWORD1)
+# Data types (KEYWORD1)
 RunningAverage	KEYWORD1
 
 

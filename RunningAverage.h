@@ -24,9 +24,9 @@ public:
 
   void     clear();
   void     add(const float value)    { addValue(value); };
-  void     addValue(const float);
-  void     fillValue(const float, const uint16_t);
-  float    getValue(const uint16_t);
+  void     addValue(const float value);
+  void     fillValue(const float value, const uint16_t number);
+  float    getValue(const uint16_t position);
 
   float    getAverage();      // iterates over all elements.
   float    getFastAverage() const;  // reuses previous calculated values.
@@ -46,14 +46,14 @@ public:
   // return true if buffer is full
   bool     bufferIsFull() const { return _count == _size; };
 
-  float    getElement(uint16_t idx) const;
+  float    getElement(uint16_t position) const;
 
   uint16_t getSize() const { return _size; }
   uint16_t getCount() const { return _count; }
 
   // use not all elements just a part from 0..partial-1
   // (re)setting partial will clear the internal buffer.
-  void     setPartial(const uint16_t part = 0);  // 0 ==> use all
+  void     setPartial(const uint16_t partial = 0);  // 0 ==> use all
   uint16_t getPartial()   { return _partial; };
 
 protected:
@@ -67,4 +67,6 @@ protected:
   float    _max;
 };
 
+
 // -- END OF FILE --
+
