@@ -78,8 +78,7 @@ void RunningAverage::addValue(const float value)
 {
   if (_array == NULL)
   {
-    // allocation error
-    return;  
+    return;
   }
 
   _sum -= _array[_index];
@@ -104,11 +103,9 @@ float RunningAverage::getAverage()
 {
   if (_count == 0) 
   {
-    // error
     return NAN;
   }
 
-  // TODO : optimize local sum and reverse loop - compare zero.
   _sum = 0;
   for (uint16_t i = 0; i < _count; i++)
   {
@@ -123,7 +120,6 @@ float RunningAverage::getFastAverage() const
 {
   if (_count == 0)
   {
-    // error
     return NAN;
   }
 
@@ -136,7 +132,6 @@ float RunningAverage::getMinInBuffer() const
 {
   if (_count == 0)
   {
-    // error
     return NAN;
   }
 
@@ -154,7 +149,6 @@ float RunningAverage::getMaxInBuffer() const
 {
   if (_count == 0)
   {
-    // error
     return NAN;
   }
 
@@ -172,7 +166,6 @@ float RunningAverage::getElement(uint16_t index) const
 {
   if (_count == 0)
   {
-    // error
     return NAN;
   }
 
@@ -190,7 +183,6 @@ float RunningAverage::getStandardDeviation() const
   float average = getFastAverage();
   for (uint16_t i = 0; i < _count; i++)
   {
-    // TODO optimize float * float ?  reverse  loop?
     temp += pow((_array[i] - average), 2);
   }
   temp = sqrt(temp/(_count - 1));
@@ -203,10 +195,10 @@ float RunningAverage::getStandardDeviation() const
 // If buffer is empty or has only one element, return NAN.
 float RunningAverage::getStandardError() const //++
 {
-  float temp = getStandardDeviation();
+  if (_count <= 1) return NAN;
 
+  float temp = getStandardDeviation();
   if (temp == NAN) return NAN;
-  if (_count <= 1) return NAN;    //  TODO test first.
 
   float n;
   if (_count >= 30) n = _count;

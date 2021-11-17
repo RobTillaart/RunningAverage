@@ -38,12 +38,14 @@ No default size (yet).
 
 ### Basic
 
-- **void clear()** empties internal buffer.
+- **void clear()** empties the internal buffer.
 - **void add(float value)** wrapper for **addValue()**
 - **void addValue(float value)** adds a new value to the object, if internal buffer is full, the oldest element is removed.
 - **void fillValue(float value, uint16_t number)**  adds number elements of value. Good for initializing the system to z certain starting average.
-- **float getValue(uint16_t position)** returns element at **position**. [expailn better]
-- **float getAverage()** iterates over all elements to get the average, slower but accurate
+- **float getValue(uint16_t position)** returns the value at **position** from the additions. 
+Position 0 is the first one to disappear.
+- **float getAverage()** iterates over all elements to get the average, slower but accurate. 
+Updates the variables used by **getFastAverage()** to improve its accuracy again.
 - **float getFastAverage()** reuses previous calculated values, therefore faster. Accuracy can drift.
 
 
@@ -61,7 +63,7 @@ Needs more than one element to be calculable.
 ### Admin functions
 
 - **bool bufferIsFull()** returns true if buffer is full.
-- **float getElement(uint16_t index)** get element directly from internal buffer. (debug)
+- **float getElement(uint16_t index)** get element directly from internal buffer at index. (debug)
 - **uint16_t getSize()** returns the size of the internal array.
 - **uint16_t getCount()** returns the number of slots used of the internal array.
 

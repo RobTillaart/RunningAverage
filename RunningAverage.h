@@ -46,7 +46,7 @@ public:
   // return true if buffer is full
   bool     bufferIsFull() const { return _count == _size; };
 
-  float    getElement(uint16_t position) const;
+  float    getElement(uint16_t index) const;
 
   uint16_t getSize() const { return _size; }
   uint16_t getCount() const { return _count; }
