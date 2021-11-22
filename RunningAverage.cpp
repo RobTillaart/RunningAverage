@@ -266,7 +266,7 @@ float RunningAverage::getAverageLast(uint16_t count)
   uint16_t cnt = count;
   if (cnt > _size) cnt = _size;
   if (cnt > _count) cnt = _count;
-  if (_cnt == 0) return NAN;
+  if (cnt == 0) return NAN;
 
   uint16_t idx = _index;
   if (idx == 0) idx = _size;
@@ -288,7 +288,7 @@ float RunningAverage::getMinInBufferLast(uint16_t count)
   uint16_t cnt = count;
   if (cnt > _size) cnt = _size;
   if (cnt > _count) cnt = _count;
-  if (_cnt == 0) return NAN;
+  if (cnt == 0) return NAN;
 
   uint16_t idx = _index;
   if (idx == 0) idx = _size;
@@ -310,7 +310,7 @@ float RunningAverage::getMaxInBufferLast(uint16_t count)
   uint16_t cnt = count;
   if (cnt > _size) cnt = _size;
   if (cnt > _count) cnt = _count;
-  if (_cnt == 0) return NAN;
+  if (cnt == 0) return NAN;
 
   uint16_t idx = _index;
   if (idx == 0) idx = _size;
