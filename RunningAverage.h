@@ -2,7 +2,7 @@
 //
 //    FILE: RunningAverage.h
 //  AUTHOR: Rob.Tillaart@gmail.com
-// VERSION: 0.4.0
+// VERSION: 0.4.1
 //    DATE: 2016-dec-01
 // PURPOSE: Arduino library to calculate the running average by means of a circular buffer
 //     URL: https://github.com/RobTillaart/RunningAverage
@@ -13,7 +13,7 @@
 #include "Arduino.h"
 
 
-#define RUNNINGAVERAGE_LIB_VERSION    (F("0.4.0"))
+#define RUNNINGAVERAGE_LIB_VERSION    (F("0.4.1"))
 
 
 class RunningAverage
@@ -55,6 +55,15 @@ public:
   // (re)setting partial will clear the internal buffer.
   void     setPartial(const uint16_t partial = 0);  // 0 ==> use all
   uint16_t getPartial()   { return _partial; };
+
+
+  // get some stats from the last count additions.
+  float    getAverageLast(uint16_t count);
+  float    getMinInBufferLast(uint16_t count);
+  float    getMaxInBufferLast(uint16_t count);
+
+
+
 
 protected:
   uint16_t _size;

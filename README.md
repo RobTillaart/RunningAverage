@@ -76,6 +76,17 @@ Allows to change the weight and history factor.
 - **uint16_t getPartial()** returns the set value for partial.
 
 
+## Last
+
+These functions get the basic statistics of the last N added elements.
+Returns NAN if there are no elements and it will reduce count
+if there are less than count elements.
+
+- **float getAverageLast(uint16_t count)** get the average of the last count elements.
+- **float getMinInBufferLast(uint16_t count)** get the minimum of the last count elements.
+- **float getMaxInBufferLast(uint16_t count)** get the maximum of the last count elements.
+  
+  
 ## Operation
 
 See examples
