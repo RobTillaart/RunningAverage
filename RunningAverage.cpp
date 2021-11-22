@@ -271,7 +271,7 @@ float RunningAverage::getAverageLast(uint16_t count)
   uint16_t idx = _index;
   if (idx == 0) idx = _size;
   idx--;
-  float _sum = _array[idx];
+  float _sum = 0;
   while (cnt > 0)
   {
     _sum +=_array[idx];
