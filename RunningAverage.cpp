@@ -268,7 +268,6 @@ float RunningAverage::getAverageLast(uint16_t count)
   if (cnt > _count) cnt = _count;
   if (cnt == 0) return NAN;
 
-  uint16_t cnt2 = cnt;
   uint16_t idx = _index;
   if (idx == 0) idx = _size;
   idx--;
@@ -280,7 +279,7 @@ float RunningAverage::getAverageLast(uint16_t count)
     idx--;
     cnt--;
   }
-  return _sum / cnt2;
+  return _sum / count;
 }
 
 
