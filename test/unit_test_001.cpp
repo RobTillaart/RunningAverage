@@ -125,6 +125,7 @@ unittest(test_partial)
   myRA.clear();
   assertFalse(myRA.bufferIsFull());
 
+  myRA.setPartial(10);
   for (int i = 0; i < 100; i++)
   {
     myRA.addValue(i);
