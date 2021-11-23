@@ -264,30 +264,24 @@ void RunningAverage::setPartial(const uint16_t partial)
 float RunningAverage::getAverageLast(uint16_t count)
 {
   uint16_t cnt = count;
-  if (cnt > _size) cnt = _size;
   if (cnt > _count) cnt = _count;
   if (cnt == 0) return NAN;
-  uint16_t cnt2 = cnt;   // cnt2 is adjusted for _size and _count
 
   uint16_t idx = _index;
-  if (idx == 0) idx = _size;
-  idx--;
   float _sum = 0;
-  while (cnt > 0)
+  for (uint16_t i = 0; i < cnt; i++)
   {
-    _sum +=_array[idx];
     if (idx == 0) idx = _size;
     idx--;
-    cnt--;
+    _sum +=_array[idx];
   }
-  return _sum / cnt2;
+  return _sum / cnt;
 }
 
 
 float RunningAverage::getMinInBufferLast(uint16_t count)
 {
   uint16_t cnt = count;
-  if (cnt > _size) cnt = _size;
   if (cnt > _count) cnt = _count;
   if (cnt == 0) return NAN;
 
@@ -295,12 +289,11 @@ float RunningAverage::getMinInBufferLast(uint16_t count)
   if (idx == 0) idx = _size;
   idx--;
   float _min = _array[idx];
-  while (cnt > 0)
+  for (uint16_t i = 0; i < cnt; i++)
   {
     if (_array[idx] < _min) _min = _array[idx];
     if (idx == 0) idx = _size;
     idx--;
-    cnt--;
   }
   return _min;
 }
@@ -309,7 +302,6 @@ float RunningAverage::getMinInBufferLast(uint16_t count)
 float RunningAverage::getMaxInBufferLast(uint16_t count)
 {
   uint16_t cnt = count;
-  if (cnt > _size) cnt = _size;
   if (cnt > _count) cnt = _count;
   if (cnt == 0) return NAN;
 
@@ -317,12 +309,11 @@ float RunningAverage::getMaxInBufferLast(uint16_t count)
   if (idx == 0) idx = _size;
   idx--;
   float _max = _array[idx];
-  while (cnt > 0)
+  for (uint16_t i = 0; i < cnt; i++)
   {
     if (_array[idx] > _max) _max = _array[idx];
     if (idx == 0) idx = _size;
     idx--;
-    cnt--;
   }
   return _max;
 }
