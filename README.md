@@ -76,6 +76,28 @@ Allows to change the weight and history factor.
 - **uint16_t getPartial()** returns the set value for partial.
 
 
+## Last
+
+These functions get the basic statistics of the last N added elements. 
+Returns NAN if there are no elements and it will reduce count if there are less than 
+count elements in the buffer.
+
+- **float getAverageLast(uint16_t count)** get the average of the last count elements.
+- **float getMinInBufferLast(uint16_t count)** get the minimum of the last count elements.
+- **float getMaxInBufferLast(uint16_t count)** get the maximum of the last count elements.
+
+These functions are useful in cases where you might want to calculate and display the 
+statistics of a subset of the added elements. Reason might be to compare this with the 
+numbers of the whole buffer to notice changes earlier. 
+Otherwise one should create multiple RunningAverage objects each with its own length, 
+effectively having multiple copies of the data added. 
+
+Note: if called with a value larger or equal to **getCount()**  (incl **getSize()**) as 
+parameter, the functions will return the statistics of the whole buffer. 
+
+
+
+
 ## Operation
 
 See examples

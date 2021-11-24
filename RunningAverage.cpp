@@ -1,7 +1,7 @@
 //
 //    FILE: RunningAverage.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.4.0
+// VERSION: 0.4.1
 //    DATE: 2015-July-10
 // PURPOSE: Arduino library to calculate the running average by means of a circular buffer
 //     URL: https://github.com/RobTillaart/RunningAverage
@@ -36,7 +36,9 @@
 //  0.3.1   2020-06-19  fix library.json; minor refactor
 //  0.3.2   2021-01-15  add add() + license + refactor
 //  0.4.0   2021-05-18  increase size above 256 elements (16 bit version)
-//
+//  0.4.1   2021-11-22  updated buil-CI, readme, badges
+//                      add getAverageLast() functions.
+//                      
 
 
 #include "RunningAverage.h"
@@ -135,12 +137,12 @@ float RunningAverage::getMinInBuffer() const
     return NAN;
   }
 
-  float min = _array[0];
+  float _min = _array[0];
   for (uint16_t i = 1; i < _count; i++)
   {
-    if (_array[i] < min) min = _array[i];
+    if (_array[i] < _min) _min = _array[i];
   }
-  return min;
+  return _min;
 }
 
 
@@ -152,12 +154,12 @@ float RunningAverage::getMaxInBuffer() const
     return NAN;
   }
 
-  float max = _array[0];
+  float _max = _array[0];
   for (uint16_t i = 1; i < _count; i++)
   {
-    if (_array[i] > max) max = _array[i];
+    if (_array[i] > _max) _max = _array[i];
   }
-  return max;
+  return _max;
 }
 
 
@@ -177,7 +179,10 @@ float RunningAverage::getElement(uint16_t index) const
 // If buffer is empty or has only one element, return NAN.
 float RunningAverage::getStandardDeviation() const
 {
-  if (_count <= 1) return NAN;
+  if (_count <= 1)
+  {
+    return NAN;
+  }
 
   float temp = 0;
   float average = getFastAverage();
@@ -195,7 +200,10 @@ float RunningAverage::getStandardDeviation() const
 // If buffer is empty or has only one element, return NAN.
 float RunningAverage::getStandardError() const //++
 {
-  if (_count <= 1) return NAN;
+  if (_count <= 1)
+  {
+    return NAN;
+  }
 
   float temp = getStandardDeviation();
   if (temp == NAN) return NAN;
@@ -226,8 +234,14 @@ void RunningAverage::fillValue(const float value, const uint16_t number)
 
 float RunningAverage::getValue(const uint16_t position)
 {
-  if (_count == 0) return NAN;
-  if (position >= _count) return NAN;  // cannot ask more than is added
+  if (_count == 0)
+  {
+    return NAN;
+  }
+  if (position >= _count)
+  {
+    return NAN;  // cannot ask more than is added
+  }
 
   uint16_t _pos = position + _index;
   if (_pos >= _count) _pos -= _count;
@@ -240,6 +254,68 @@ void RunningAverage::setPartial(const uint16_t partial)
   _partial = partial;
   if ((_partial == 0) || (_partial > _size)) _partial = _size;
   clear();
+}
+
+
+////////////////////////////////////////////////////////////////
+//
+// 0.4.1 added.
+//
+float RunningAverage::getAverageLast(uint16_t count)
+{
+  uint16_t cnt = count;
+  if (cnt > _count) cnt = _count;
+  if (cnt == 0) return NAN;
+
+  uint16_t idx = _index;
+  float _sum = 0;
+  for (uint16_t i = 0; i < cnt; i++)
+  {
+    if (idx == 0) idx = _size;
+    idx--;
+    _sum +=_array[idx];
+  }
+  return _sum / cnt;
+}
+
+
+float RunningAverage::getMinInBufferLast(uint16_t count)
+{
+  uint16_t cnt = count;
+  if (cnt > _count) cnt = _count;
+  if (cnt == 0) return NAN;
+
+  uint16_t idx = _index;
+  if (idx == 0) idx = _size;
+  idx--;
+  float _min = _array[idx];
+  for (uint16_t i = 0; i < cnt; i++)
+  {
+    if (_array[idx] < _min) _min = _array[idx];
+    if (idx == 0) idx = _size;
+    idx--;
+  }
+  return _min;
+}
+
+
+float RunningAverage::getMaxInBufferLast(uint16_t count)
+{
+  uint16_t cnt = count;
+  if (cnt > _count) cnt = _count;
+  if (cnt == 0) return NAN;
+
+  uint16_t idx = _index;
+  if (idx == 0) idx = _size;
+  idx--;
+  float _max = _array[idx];
+  for (uint16_t i = 0; i < cnt; i++)
+  {
+    if (_array[idx] > _max) _max = _array[idx];
+    if (idx == 0) idx = _size;
+    idx--;
+  }
+  return _max;
 }
 
 
