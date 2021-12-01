@@ -63,8 +63,6 @@ public:
   float    getMaxInBufferLast(uint16_t count);
 
 
-
-
 protected:
   uint16_t _size;
   uint16_t _count;
