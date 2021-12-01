@@ -179,10 +179,11 @@ float RunningAverage::getElement(uint16_t index) const
 // If buffer is empty or has only one element, return NAN.
 float RunningAverage::getStandardDeviation() const
 {
-  if (_count <= 1)
-  {
-    return NAN;
-  }
+  // see issue #13
+  // need float _stddev = -1;
+  //    + patch add() and clear() to reset _stddev to -1;
+  // if (_stddev != -1) return _stddev;
+  if (_count <= 1) return NAN;
 
   float temp = 0;
   float average = getFastAverage();
@@ -191,20 +192,17 @@ float RunningAverage::getStandardDeviation() const
     temp += pow((_array[i] - average), 2);
   }
   temp = sqrt(temp/(_count - 1));
-
   return temp;
+  // see issue #13
+  // _stddev = temp;  // cache the calculate value
+  // return _stddev;
 }
 
 
 // Return standard error of running average. 
 // If buffer is empty or has only one element, return NAN.
-float RunningAverage::getStandardError() const //++
+float RunningAverage::getStandardError() const
 {
-  if (_count <= 1)
-  {
-    return NAN;
-  }
-
   float temp = getStandardDeviation();
   if (temp == NAN) return NAN;
 
@@ -230,6 +228,25 @@ void RunningAverage::fillValue(const float value, const uint16_t number)
     addValue(value);
   }
 }
+
+// https://github.com/RobTillaart/RunningAverage/issues/13
+// - substantially faster version off fillValue()
+// - adds to program size
+// void RunningAverage::fillValue(const float value, const uint16_t number)
+// {
+  // uint16_t s = number;
+  // if (s > _size) s = _size;
+  // for (uint16_t idx = 0; idx < s; idx++)
+  // {
+    // _array[idx] = value;
+  // }
+  // _index = s;
+  // if (_index == _partial) _index = 0;  // faster than %
+  // _min = value;
+  // _max = value;
+  // _count = s;
+  // _sum = s * value;
+// }
 
 
 float RunningAverage::getValue(const uint16_t position)
