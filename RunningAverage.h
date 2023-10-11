@@ -1,7 +1,7 @@
 #pragma once
 //
 //    FILE: RunningAverage.h
-//  AUTHOR: Rob.Tillaart@gmail.com
+//  AUTHOR: Rob Tillaart
 // VERSION: 0.4.3
 //    DATE: 2016-dec-01
 // PURPOSE: Arduino library to calculate the running average by means of a circular buffer

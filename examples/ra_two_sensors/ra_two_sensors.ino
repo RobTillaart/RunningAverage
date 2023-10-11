@@ -19,8 +19,9 @@ float humidity = 40.0;
 void setup(void)
 {
   Serial.begin(115200);
+  Serial.println();
   Serial.println(__FILE__);
-  Serial.print("Version: ");
+  Serial.print("RUNNINGAVERAGE_LIB_VERSION: ");
   Serial.println(RUNNINGAVERAGE_LIB_VERSION);
 
   // explicitly start clean
@@ -32,8 +33,8 @@ void setup(void)
 void loop(void)
 {
   // random function simulates 2 sensors
-  temperature = temperature - 1 + random(0, 200) * 0.01;  // fluctuate +- 1°C
-  humidity = humidity - 0.2 + random(0, 400) * 0.001;     // fluctuate +- 0.2 %
+  temperature = temperature - 1 + random(0, 200) * 0.01;  //  fluctuate +- 1°C
+  humidity = humidity - 0.2 + random(0, 400) * 0.001;     //  fluctuate +- 0.2 %
 
   RAT.addValue(temperature);
   RAH.addValue(humidity);
@@ -60,5 +61,5 @@ void loop(void)
 }
 
 
-// -- END OF FILE --
+//  -- END OF FILE --
 

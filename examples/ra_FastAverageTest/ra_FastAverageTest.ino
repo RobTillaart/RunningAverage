@@ -20,9 +20,9 @@ uint32_t start, stop;
 void setup(void)
 {
   Serial.begin(115200);
-  Serial.print("\nDemo ");
+  Serial.println();
   Serial.println(__FILE__);
-  Serial.print("Version: ");
+  Serial.print("RUNNINGAVERAGE_LIB_VERSION: ");
   Serial.println(RUNNINGAVERAGE_LIB_VERSION);
   myRA.clear(); // explicitly start clean
 

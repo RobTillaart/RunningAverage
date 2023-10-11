@@ -17,7 +17,7 @@
   },
   "version": "0.4.3",
   "license": "MIT",
-  "frameworks": "arduino",
+  "frameworks": "*",
   "platforms": "*",
   "headers": "RunningAverage.h"
 }
