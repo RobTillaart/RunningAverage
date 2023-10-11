@@ -24,7 +24,7 @@ void setup(void)
   Serial.print("RUNNINGAVERAGE_LIB_VERSION: ");
   Serial.println(RUNNINGAVERAGE_LIB_VERSION);
 
-  // explicitly start clean
+  //  explicitly start clean
   RAT.clear(); 
   RAH.clear();
 }
@@ -32,14 +32,14 @@ void setup(void)
 
 void loop(void)
 {
-  // random function simulates 2 sensors
+  //  random function simulates 2 sensors
   temperature = temperature - 1 + random(0, 200) * 0.01;  //  fluctuate +- 1°C
   humidity = humidity - 0.2 + random(0, 400) * 0.001;     //  fluctuate +- 0.2 %
 
   RAT.addValue(temperature);
   RAH.addValue(humidity);
 
-  // print a header every 20 lines
+  //  print a header every 20 lines
   if (samples % 20 == 0)
   {
     Serial.println("\nCNT\tT\tTavg\tH\tHavg");

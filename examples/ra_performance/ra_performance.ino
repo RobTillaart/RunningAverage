@@ -23,7 +23,7 @@ void setup(void)
   Serial.println(RUNNINGAVERAGE_LIB_VERSION);
   Serial.println();
 
-  myRA.clear(); // explicitly start clean
+  myRA.clear();  //  explicitly start clean
 
   for (int i = 0; i < 10; i++)
   {

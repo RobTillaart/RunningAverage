@@ -12,6 +12,7 @@ RunningAverage raDays(14);    //  holds min and max of the last seven days.
 int samples = 0;
 int day = 0;
 
+
 void setup(void)
 {
   Serial.begin(115200);

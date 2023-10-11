@@ -18,7 +18,7 @@ void setup(void)
   Serial.println(__FILE__);
   Serial.print("RUNNINGAVERAGE_LIB_VERSION: ");
   Serial.println(RUNNINGAVERAGE_LIB_VERSION);
-  myRA.clear(); // explicitly start clean
+  myRA.clear();  //  explicitly start clean
 
   Serial.println("\nCNT\tMIN\tAVG\tMAX");
 }

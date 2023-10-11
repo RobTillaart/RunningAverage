@@ -19,15 +19,15 @@ void setup(void)
   Serial.print("RUNNINGAVERAGE_LIB_VERSION: ");
   Serial.println(RUNNINGAVERAGE_LIB_VERSION);
 
-  myRA.clear(); //  explicitly start clean
+  myRA.clear();  //   explicitly start clean
 
   for (int i = 0; i < 10; i++)
   {
     myRA.add(i * 0.01 + 1 );
-//    Serial.print(myRA.getCount());
-//    Serial.print("\t");
-//    Serial.print(myRA.getAverage(), 3);
-//    Serial.print("\t");
+    //    Serial.print(myRA.getCount());
+    //    Serial.print("\t");
+    //    Serial.print(myRA.getAverage(), 3);
+    //    Serial.print("\t");
     Serial.print(myRA.getStandardDeviation(), 3);
     Serial.print("\t");
     Serial.println(myRA.getMaxInBuffer(), 3);
