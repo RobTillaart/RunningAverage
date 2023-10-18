@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.4.4] - 2023-
+## [0.4.4] - 2023-10-18
 - update readme.md badges
 - update examples
 - add two step example
