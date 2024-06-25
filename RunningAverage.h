@@ -2,7 +2,7 @@
 //
 //    FILE: RunningAverage.h
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.4.5
+// VERSION: 0.4.6
 //    DATE: 2011-01-30
 // PURPOSE: Arduino library to calculate the running average by means of a circular buffer
 //     URL: https://github.com/RobTillaart/RunningAverage
@@ -14,7 +14,7 @@
 #include "Arduino.h"
 
 
-#define RUNNINGAVERAGE_LIB_VERSION    (F("0.4.5"))
+#define RUNNINGAVERAGE_LIB_VERSION    (F("0.4.6"))
 
 
 class RunningAverage
@@ -78,6 +78,112 @@ protected:
   float    _max;
 };
 
+
+class RA_Weight : public RunningAverage
+{
+public:
+  RA_Weight(const uint16_t size) : RunningAverage(size)
+  {
+    _weight = (float *) malloc(_size * sizeof(float));
+    if (_weight == NULL) _size = 0;
+    _sumWeight = 0;
+  }
+
+
+  ~RA_Weight()
+  {
+    if (_weight) free(_weight);
+  }
+
+
+  void addValue(const float value, const float weight = 1.0)
+  {
+    if ((_array == NULL) || (_weight == NULL))
+    {
+      return;
+    }
+    _sumWeight -= _weight[_index];
+    _weight[_index] = weight;
+    _sumWeight += _weight[_index];
+
+    _sum -= _array[_index];
+    _array[_index] = value;
+    _sum += _array[_index];
+
+    _index++;
+
+    if (_index == _partial) _index = 0;  //  faster than %
+
+    //  handle min max
+    if (_count == 0) _min = _max = value;
+    else if (value < _min) _min = value;
+    else if (value > _max) _max = value;
+
+    //  update count as last otherwise if ( _count == 0) above will fail
+    if (_count < _partial) _count++;
+  }
+
+
+  //  returns the average of the data-set added so far, NAN if no elements.
+  float getAverage()
+  {
+    if (_count == 0)
+    {
+      return NAN;
+    }
+    //  OPTIMIZE local variable for sums.
+    _sumValues = 0;
+    _sumWeight = 0;
+    for (uint16_t i = 0; i < _count; i++)
+    {
+      _sumValues += _array[i];
+      _sumWeight += _weight[i];
+    }
+    return _sumValues / _sumWeight;   //  multiplication is faster ==> extra admin
+  }
+
+
+  float getFastAverage() const
+  {
+    if (_count == 0)
+    {
+      return NAN;
+    }
+    return _sum / _sumWeight;   //  multiplication is faster ==> extra admin
+  }
+
+
+  //  returns the weight of an element if exist, NAN otherwise
+  float getWeight(uint16_t index) const
+  {
+    if (_count == 0)
+    {
+      return NAN;
+    }
+    return _weight[index];
+  }
+
+
+  //  what to support ...
+  // void fillValue(const float value, const float weight, const uint16_t number)
+  // {
+    // clear();
+    // uint16_t s = number;
+    // if (s > _partial) s = _partial;
+
+    // for (uint16_t i = s; i > 0; i--)
+    // {
+      // addValue(value, weight);
+    // }
+  // }
+
+
+
+protected:
+  float * _weight;
+  float   _sumValues;
+  float   _sumWeight;
+};
 
 //  -- END OF FILE --
 

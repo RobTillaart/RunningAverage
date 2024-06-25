@@ -6,10 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.4.6] - 2024-06-15
+- add experimental derived class RA_Weight (thanks to heidnerd for the idea)
+- minor edits.
+
 ## [0.4.5] - 2024-01-05
 - fix URL in examples
 - minor edits
-
 
 ## [0.4.4] - 2023-10-18
 - update readme.md badges
@@ -29,7 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - minor edits
 
 ## [0.4.1] - 2021-11-22
-- updated buil-CI, readme, badges
+- updated build-CI, readme, badges
 - add getAverageLast() functions.
 
 ## [0.4.0] - 2021-05-18
@@ -56,7 +59,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.2.15] - 2020-01-17
 - fix overflow in getValue - see issue #139
-
 
 ## [0.2.14] - 2020-01-15
 - added getValue(n) to retrieve elements in order of addition - see issue #132
@@ -107,7 +109,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.2.01] - 2012-11-21
 - refactored
 
-## [0.2.00] - 2012-??-??  
+## [0.2.00] - 2012-??-??
 - Yuval Naveh added trimValue (found on web)
 - http://stromputer.googlecode.com/svn-history/r74/trunk/Arduino/Libraries/RunningAverage/RunningAverage.cpp
 
