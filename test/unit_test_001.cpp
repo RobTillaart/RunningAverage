@@ -63,7 +63,7 @@ unittest(test_zero_elements)
 }
 
 
-unittest(test_min_max)
+unittest(test_min_max_sum)
 {
   RunningAverage myRA(10);
   myRA.clear();
@@ -81,6 +81,9 @@ unittest(test_min_max)
   mi = myRA.getMinInBuffer();
   assertEqual(-4, mi);
   ma = myRA.getMaxInBuffer();
+  assertEqual(5, ma);
+
+  ma = myRA.getSum();
   assertEqual(5, ma);
 }
 
@@ -151,25 +154,37 @@ unittest(test_last)
   {
     myRA.addValue(i);
   }
+
+  fprintf(stderr, "\nPARTIAL: 0\n");
   assertNAN(myRA.getMinInBufferLast(0));
   assertNAN(myRA.getAverageLast(0));
   assertNAN(myRA.getMaxInBufferLast(0));
+  assertNAN(myRA.getStandardDeviationLast(0));
 
+  fprintf(stderr, "\nPARTIAL: 0\n");
   assertEqualFloat(999.0, myRA.getMinInBufferLast(1), 0.001);
   assertEqualFloat(999.0, myRA.getAverageLast(1), 0.001);
   assertEqualFloat(999.0, myRA.getMaxInBufferLast(1), 0.001);
+  assertEqualFloat(0, myRA.getStandardDeviationLast(1), 0.001);
 
+  fprintf(stderr, "\nPARTIAL: 0\n");
   assertEqualFloat(990.0, myRA.getMinInBufferLast(10), 0.001);
   assertEqualFloat(994.5, myRA.getAverageLast(10), 0.001);
   assertEqualFloat(999.0, myRA.getMaxInBufferLast(10), 0.001);
+  assertEqualFloat(0, myRA.getStandardDeviationLast(10), 0.001);
 
+  fprintf(stderr, "\nPARTIAL: 0\n");
   assertEqualFloat(900.0, myRA.getMinInBufferLast(100), 0.001);
   assertEqualFloat(949.5, myRA.getAverageLast(100), 0.001);
   assertEqualFloat(999.0, myRA.getMaxInBufferLast(100), 0.001);
+  assertEqualFloat(0, myRA.getStandardDeviationLast(100), 0.001);
 
+  fprintf(stderr, "\nPARTIAL: 0\n");
   assertEqualFloat(700.0, myRA.getMinInBufferLast(1000), 0.001);
   assertEqualFloat(849.5, myRA.getAverageLast(1000), 0.001);
   assertEqualFloat(999.0, myRA.getMaxInBufferLast(1000), 0.001);
+  assertEqualFloat(0, myRA.getStandardDeviationLast(1000), 0.001);
+
 }
 
 

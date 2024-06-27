@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - changed return type **bool fillValue(..)**
   - changed return type **bool setPartial(..)**
 - moved performance.txt to performance sketch
+- update unit test
 - update keywords.txt
 - update readme.md
 - minor edits.
