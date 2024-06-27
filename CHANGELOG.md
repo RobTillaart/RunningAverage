@@ -7,7 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.4.6] - 2024-06-15
-- add experimental derived class RA_Weight (thanks to heidnerd for the idea)
+- Fix #30, add **float getSum()** (thanks to heidnerd)
+- Fix #31, add **float getStandardDeviationLast(uint16_t count)** (thanks to alvaro-oliver)
+- added code to detect inner array == NULL in more functions (return NAN).
+  - changed return type **bool clear()**
+  - changed return type **bool addValue(..)**
+  - changed return type **bool fillValue(..)**
+  - changed return type **bool setPartial(..)**
+- moved performance.txt to performance sketch
+- update keywords.txt
+- update readme.md
 - minor edits.
 
 ## [0.4.5] - 2024-01-05

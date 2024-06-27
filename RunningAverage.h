@@ -23,10 +23,11 @@ public:
   explicit RunningAverage(const uint16_t size);
   ~RunningAverage();
 
-  void     clear();
-  void     add(const float value)    { addValue(value); };
-  void     addValue(const float value);
-  void     fillValue(const float value, const uint16_t number);
+  //  return false if internal buffer not allocated.
+  bool     clear();
+  bool     add(const float value)    { return addValue(value); };
+  bool     addValue(const float value);
+  bool     fillValue(const float value, const uint16_t number);
   float    getValue(const uint16_t position);
 
   float    getAverage();            //  iterates over all elements.
@@ -40,9 +41,10 @@ public:
   float    getMin() const { return _min; };
   float    getMax() const { return _max; };
 
-  //  returns min/max from the values in the internal buffer
+  //  returns min/max/sum from the values in the internal buffer
   float    getMinInBuffer() const;
   float    getMaxInBuffer() const;
+  float    getSum() const { return _sum; };
 
   //  return true if buffer is full
   bool     bufferIsFull() const { return _count == _size; };
@@ -54,12 +56,13 @@ public:
 
   //  use not all elements just a part from 0..partial-1
   //  (re)setting partial will clear the internal buffer.
-  void     setPartial(const uint16_t partial = 0);  // 0 ==> use all
+  bool     setPartial(const uint16_t partial = 0);  //  0 ==> use all
   uint16_t getPartial()   { return _partial; };
 
 
   //  get some stats from the last count additions.
   float    getAverageLast(uint16_t count);
+  float    getStandardDeviationLast(uint16_t count);
   float    getMinInBufferLast(uint16_t count);
   float    getMaxInBufferLast(uint16_t count);
 
@@ -78,112 +81,6 @@ protected:
   float    _max;
 };
 
-
-class RA_Weight : public RunningAverage
-{
-public:
-  RA_Weight(const uint16_t size) : RunningAverage(size)
-  {
-    _weight = (float *) malloc(_size * sizeof(float));
-    if (_weight == NULL) _size = 0;
-    _sumWeight = 0;
-  }
-
-
-  ~RA_Weight()
-  {
-    if (_weight) free(_weight);
-  }
-
-
-  void addValue(const float value, const float weight = 1.0)
-  {
-    if ((_array == NULL) || (_weight == NULL))
-    {
-      return;
-    }
-    _sumWeight -= _weight[_index];
-    _weight[_index] = weight;
-    _sumWeight += _weight[_index];
-
-    _sum -= _array[_index];
-    _array[_index] = value;
-    _sum += _array[_index];
-
-    _index++;
-
-    if (_index == _partial) _index = 0;  //  faster than %
-
-    //  handle min max
-    if (_count == 0) _min = _max = value;
-    else if (value < _min) _min = value;
-    else if (value > _max) _max = value;
-
-    //  update count as last otherwise if ( _count == 0) above will fail
-    if (_count < _partial) _count++;
-  }
-
-
-  //  returns the average of the data-set added so far, NAN if no elements.
-  float getAverage()
-  {
-    if (_count == 0)
-    {
-      return NAN;
-    }
-    //  OPTIMIZE local variable for sums.
-    _sumValues = 0;
-    _sumWeight = 0;
-    for (uint16_t i = 0; i < _count; i++)
-    {
-      _sumValues += _array[i];
-      _sumWeight += _weight[i];
-    }
-    return _sumValues / _sumWeight;   //  multiplication is faster ==> extra admin
-  }
-
-
-  float getFastAverage() const
-  {
-    if (_count == 0)
-    {
-      return NAN;
-    }
-    return _sum / _sumWeight;   //  multiplication is faster ==> extra admin
-  }
-
-
-  //  returns the weight of an element if exist, NAN otherwise
-  float getWeight(uint16_t index) const
-  {
-    if (_count == 0)
-    {
-      return NAN;
-    }
-    return _weight[index];
-  }
-
-
-  //  what to support ...
-  // void fillValue(const float value, const float weight, const uint16_t number)
-  // {
-    // clear();
-    // uint16_t s = number;
-    // if (s > _partial) s = _partial;
-
-    // for (uint16_t i = s; i > 0; i--)
-    // {
-      // addValue(value, weight);
-    // }
-  // }
-
-
-
-protected:
-  float * _weight;
-  float   _sumValues;
-  float   _sumWeight;
-};
 
 //  -- END OF FILE --
 
